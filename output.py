@@ -23,19 +23,21 @@ def fetch(url):#抓取网页信息
         info_not_red = re.sub('</*font.*?>', '', data_str)
         info_not_red = re.sub('</*strong>', '', info_not_red)#去掉高亮代码
         
-        info_t = info_p = info_n = info_a = []
+        #info_t = info_a = info_p + info_n = []
         info_t = re.compile(\
-            r'题名</td>\n.*?\n(.*?)</td></tr>',re.DOTALL).findall(info_not_red)
+            r'>题名</td>\n.*?\n(.*?)</td></tr>',re.DOTALL).findall(info_not_red)
         info_a = re.compile(\
-            r'作者名</td>\n.*?\n<a.*?>(.*?)</a>',re.DOTALL).findall(info_not_red)
+            r'主要責任者</td>\n.*?\n<a.*?>(.*?)</a>',re.DOTALL).findall(info_not_red)
         info_p = re.compile(\
             r'出版发行</td>\n.*?\n(.*?)</td></tr>',re.DOTALL).findall(info_not_red)
         info_n = re.compile(\
             r'提要附注</td>\n.*?\n(.*?)</td></tr>',re.DOTALL).findall(info_not_red)
-        info_n = [re.sub(r'&#34', ':', str(info_n))]      #发现引号问题 处理 最后以list输出
-        
-        if info_t: info = list(info_t[0]) + info_p + info_n
-        if info == []:print('无搜索结果,请改变关键词')    #详细结果还没有结果,就没有结果
+        if info_n:
+            info_n = [re.sub(r'&#34', ':', info_n[0])]    #发现引号问题 处理 最后以list输出
+
+        info = info_t + info_a + info_p + info_n
+        info = [tuple(info)]
+        if info == []:print('无搜索结果,请改变关键词')     #详细结果还没有结果,就没有结果
             
     return (info)
 
@@ -58,9 +60,8 @@ def nextpage(url):
         
 
 def result_list(url):
-    list = fetch(url) 
-    lenth = len(list)
-    for i in range(0, lenth):
-        print(list[i])
-
-
+    list = fetch(url)
+    #lenth = len(list)
+    #for i in range(0, lenth):
+        #print(list[i])
+    print(list)

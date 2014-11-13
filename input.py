@@ -11,7 +11,7 @@ from output import *
     #keyword = input("请输入关键词-->")
 
 def key(keyword):
-    print('======请稍等=========================================\n------等待请求返回,等待时间时间取决于服务器响应------')
+    print('======请稍等=========================================\n------等待请求返回,等待时间时间取决于服务器响应------\n')
     
     keyword_quote = urllib.parse.quote(keyword)
     target = "http://ftp.lib.hust.edu.cn/search*chx/X?SEARCH="
