@@ -7,6 +7,7 @@ import urllib.request
 import re
 
 def fetch(url):#抓取网页信息
+    print('a')
     data = urllib.request.urlopen(url).read()
     data = data.decode('utf-8')  #请求网页信息并转码为utf-8
     

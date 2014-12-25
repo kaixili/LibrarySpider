@@ -7,9 +7,6 @@
 import urllib.parse
 from output import *
 
-#if __name__ == '__main__':
-    #keyword = input("请输入关键词-->")
-
 def key(keyword):
     print('======请稍等=========================================\n------等待请求返回,等待时间时间取决于服务器响应------\n')
     
@@ -23,3 +20,15 @@ def key(keyword):
     nextpage(url)
 
     print('======结束==========')
+
+if __name__ == '__main__':
+    keyword = input("请输入关键词-->")
+    key(keyword)
+else:
+    try:
+        keyword = sys.argv[0]
+        key = 1
+    except:
+        print('error!Keyword is not given!')
+        key = 0
+    if key: key(keyword)
